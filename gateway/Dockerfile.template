@@ -4,7 +4,7 @@ WORKDIR /opt/ttn-gateway/
 
 # downloading utils
 RUN apt-get update && \
-    apt-get install wget build-essential libc6-dev git pkg-config protobuf-compiler libprotobuf-dev libprotoc-dev automake libtool autoconf python-dev python-rpi.gpio
+    apt-get install wget build-essential libc6-dev git pkg-config protobuf-compiler libprotobuf-dev libprotoc-dev automake libtool autoconf python-dev python-rpi.gpio -y
 
 COPY dev dev
 RUN ./dev/build.sh
