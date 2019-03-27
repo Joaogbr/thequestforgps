@@ -4,15 +4,19 @@ volumes:
     node-red-test-data:
 services:
   # The gateway itself
-  ttn-resin-gateway-rpi:
+  gateway:
     build:
       context: gateway
       args:
         GW_MACHINE_NAME:
-    image: ttn-resin-gateway-rpi
+    image: amedee/ttn-gateway
     privileged: true
     network_mode: host
     restart: always
+    devices:
+      - "/dev/mem:/dev/mem"
+    volumes:
+      - var_ttn_vol:/var/ttn
   mqtt:
     image: panuwitp/mosquitto-arm
     ports:
