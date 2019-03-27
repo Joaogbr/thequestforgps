@@ -1,18 +1,41 @@
-version: '2'
+version: '2.1'
 volumes:
-    balena-node-red-data:
-    ttn-resin-gateway-rpi-data:
+    node-red-data:
+    node-red-test-data:
 services:
-balena-node-red:
-    build: balena-node-red
+  # The gateway itself
+  ttn-resin-gateway-rpi:
+    build:
+      context: gateway
+      args:
+        GW_MACHINE_NAME:
+    image: ttn-resin-gateway-rpi
+    privileged: true
+    network_mode: host
+    restart: always
+  mqtt:
+    image: panuwitp/mosquitto-arm
+    ports:
+      - "1883:1883"
+  mqtt-test:
+    image: panuwitp/mosquitto-arm
+    ports:
+      - "1884:1883"
+  node-red:
+    build: node-red
+    volumes:
+       - 'node-red-data:/data'
     ports:
        - "1880:1880"
-    privileged: true
+    depends_on:
+        - mqtt
+    restart: always
+  node-red-test:
+    build: node-red-test
     volumes:
-       - 'balena-node-red-data:/data'
-ttn-resin-gateway-rpi:
-    build:ttn-resin-gateway-rpi
-    privileged: true
-    volumes:
-       - 'ttn-resin-gateway-rpi-data:/data'
+       - 'node-red-test-data:/data'
+    ports:
+       - "1882:1880"
+    depends_on:
+        - mqtt-test
     restart: always
