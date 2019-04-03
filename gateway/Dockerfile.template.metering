@@ -25,7 +25,7 @@ RUN wget https://nodejs.org/dist/v8.8.1/node-v8.8.1-linux-armv6l.tar.gz \
 
 WORKDIR /opt/ttn-gateway/
 COPY dev dev
-RUN chmod +x. /dev/build.sh
+RUN chmod +x ./dev/build.sh
 
 FROM resin/%%RESIN_MACHINE_NAME%%-debian:stretch
 RUN apt-get update && \
@@ -47,7 +47,7 @@ WORKDIR /opt/gwexporter
 COPY --from=buildstep /opt/gwexporter .
 
 WORKDIR /opt/ttn-gateway
-COPY --from=buildstep /opt/ttn-gateway/mp_pkt_fwd .
+COPY chmod +x --from=buildstep /opt/ttn-gateway/mp_pkt_fwd .
 COPY --from=buildstep /usr/local/lib/libpaho-embed-* /usr/lib/
 COPY --from=buildstep /usr/lib/libttn* /usr/lib/
 COPY run.py run.py
