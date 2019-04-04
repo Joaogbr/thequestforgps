@@ -1,5 +1,4 @@
 version: '2.1'
-docker-compose build --no-cache
 volumes:
     node-red-data:
     node-red-test-data:
