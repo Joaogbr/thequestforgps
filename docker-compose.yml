@@ -14,7 +14,7 @@ services:
       context: gateway
       args:
         GW_MACHINE_NAME:
-    image: amedee/ttn-gateway
+    image: jpmeijers/ttn-gateway
     privileged: true
     network_mode: host
     restart: always
