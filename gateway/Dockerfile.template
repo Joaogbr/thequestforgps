@@ -22,9 +22,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=buildstep /opt/ttn-gateway/mp_pkt_fwd .
-COPY --from=buildstep /usr/local/lib/libpaho-embed-* /usr/lib/
-COPY --from=buildstep /usr/lib/libttn* /usr/lib/
+COPY --from=buildstep chmod +x ./opt/ttn-gateway/mp_pkt_fwd .
+COPY --from=buildstep ./usr/local/lib/libpaho-embed-* /usr/lib/
+COPY --from=buildstep ./usr/lib/libttn* /usr/lib/
 
 COPY run.py ./
 
