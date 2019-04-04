@@ -47,7 +47,7 @@ WORKDIR /opt/gwexporter
 COPY --from=buildstep /opt/gwexporter .
 
 WORKDIR /opt/ttn-gateway
-COPY --from=buildstep chmod +x /opt/ttn-gateway/mp_pkt_fwd .
+COPY --from=buildstep /opt/ttn-gateway/mp_pkt_fwd .
 COPY --from=buildstep /usr/local/lib/libpaho-embed-* /usr/lib/
 COPY --from=buildstep /usr/lib/libttn* /usr/lib/
 COPY run.py run.py
