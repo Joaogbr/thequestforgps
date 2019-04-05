@@ -1,6 +1,6 @@
 #! /bin/bash
 
-INSTALL_DIR="C:/Users/joaog/thequestforgps/gateway/dev/opt/ttn-gateway"
+INSTALL_DIR="/opt/ttn-gateway"
 
 mkdir -p $INSTALL_DIR/dev
 cd $INSTALL_DIR/dev
@@ -42,8 +42,7 @@ else
 fi
 
 if [ ! -d packet_forwarder ]; then
-    # Use own fork for the 'print_stats' option
-    git clone https://github.com/AmedeeBulle/packet_forwarder.git  || { echo 'Cloning packet forwarder failed.' ; exit 1; }
+    git clone https://github.com/kersing/packet_forwarder.git  || { echo 'Cloning packet forwarder failed.' ; exit 1; }
 else
     cd packet_forwarder
     git reset --hard
