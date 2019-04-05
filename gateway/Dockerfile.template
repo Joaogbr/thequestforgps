@@ -1,4 +1,7 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-debian:stretch AS buildstep
+# Gateway container
+ARG GW_MACHINE_NAME
+
+FROM resin/${GW_MACHINE_NAME:-%%RESIN_MACHINE_NAME%%}-debian:stretch AS buildstep
 
 WORKDIR /opt/ttn-gateway/
 
@@ -9,9 +12,8 @@ RUN apt-get update && \
 COPY dev dev
 RUN chmod +x ./dev/build.sh
 
-FROM resin/%%RESIN_MACHINE_NAME%%-debian:stretch
-
-ENV UDEV=off
+# FROM resin/%%RESIN_MACHINE_NAME%%-debian:latest
+FROM resin/${GW_MACHINE_NAME:-%%RESIN_MACHINE_NAME%%}-debian:stretch
 
 WORKDIR /opt/ttn-gateway
 
@@ -20,12 +22,12 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=buildstep /opt/ttn-gateway/mp_pkt_fwd .
+COPY --from=buildstep C:/Users/joaog/thequestforgps/gateway/dev/opt/ttn-gateway/mp_pkt_fwd .
 COPY --from=buildstep /usr/local/lib/libpaho-embed-* /usr/lib/
 COPY --from=buildstep /usr/lib/libttn* /usr/lib/
 
 COPY run.py ./
-COPY start.sh ./
 
-# run when container lands on device
-CMD ["bash", "start.sh"]
+WORKDIR /var/ttn
+
+CMD ["/opt/ttn-gateway/run.py"]
