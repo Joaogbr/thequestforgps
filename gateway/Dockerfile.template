@@ -1,6 +1,6 @@
 FROM resin/%%RESIN_MACHINE_NAME%%-debian:stretch AS buildstep
 
-WORKDIR /opt/ttn-gateway/
+WORKDIR C:/Users/joaog/thequestforgps/gateway/dev/opt/ttn-gateway/
 
 # downloading utils
 RUN apt-get update && \
@@ -13,14 +13,14 @@ FROM resin/%%RESIN_MACHINE_NAME%%-debian:stretch
 
 ENV UDEV=off
 
-WORKDIR /opt/ttn-gateway
+WORKDIR C:/Users/joaog/thequestforgps/gateway/dev/opt/ttn-gateway
 
 RUN apt-get update && \
     apt-get install python-rpi.gpio && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=buildstep /opt/ttn-gateway/mp_pkt_fwd .
+COPY --from=buildstep ./dev/opt/ttn-gateway/mp_pkt_fwd .
 COPY --from=buildstep /usr/local/lib/libpaho-embed-* /usr/lib/
 COPY --from=buildstep /usr/lib/libttn* /usr/lib/
 
