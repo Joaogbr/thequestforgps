@@ -1,6 +1,6 @@
 #! /bin/bash
 
-INSTALL_DIR="C:/Users/joaog/thequestforgps/gateway/dev/opt/ttn-gateway"
+INSTALL_DIR="/opt/ttn-gateway"
 
 mkdir -p $INSTALL_DIR/dev
 mkdir -p $INSTALL_DIR/mp_pkt_fwd
