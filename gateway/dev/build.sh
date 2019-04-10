@@ -87,6 +87,6 @@ cd $INSTALL_DIR/dev/packet_forwarder/mp_pkt_fwd/
 make -j$(nproc)
 
 # Copy things needed at runtime to where they'll be expected
-cp -a $INSTALL_DIR/dev/packet_forwarder/mp_pkt_fwd $INSTALL_DIR/mp_pkt_fwd
+cp -a $INSTALL_DIR/dev/packet_forwarder/mp_pkt_fwd $INSTALL_DIR/mp_pkt_fwd/mp_pkt_fwd
 
 echo "Build & Installation Completed."
