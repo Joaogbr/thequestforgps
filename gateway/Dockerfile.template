@@ -5,6 +5,8 @@ FROM resin/${GW_MACHINE_NAME:-%%RESIN_MACHINE_NAME%%}-debian:stretch AS buildste
 
 WORKDIR /opt/ttn-gateway/
 
+ENV CACHE 2
+
 # downloading utils
 RUN apt-get update && \
     apt-get install wget build-essential libc6-dev git pkg-config protobuf-compiler libprotobuf-dev libprotoc-dev automake libtool autoconf python-dev python-rpi.gpio
@@ -22,8 +24,6 @@ RUN apt-get update && \
     apt-get install python-rpi.gpio && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-    
-    ENV CACHE 2
 
 COPY --from=buildstep /opt/ttn-gateway/mp_pkt_fwd .
 COPY --from=buildstep /usr/local/lib/libpaho-embed-* /usr/lib/
