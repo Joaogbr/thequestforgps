@@ -18,6 +18,10 @@ services:
     privileged: true
     network_mode: host
     restart: always
+    environment:
+      GW_KEY: "${GW_KEY:?Gateway Key is mandatory}"
+      GW_ID: "${GW_ID:?Gateway Id is mandatory}"
+      GW_EUI: "${GW_EUI}"
     devices:
       - "/dev/mem:/dev/mem"
     volumes:
