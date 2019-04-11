@@ -12,6 +12,7 @@ services:
   gateway:
     build:
       context: ./gateway
+      dockerfile: Dockerfile.template
       args:
         GW_MACHINE_NAME:
     image: amedee/ttn-gateway
