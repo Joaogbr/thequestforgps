@@ -16,7 +16,7 @@ FROM resin/${GW_MACHINE_NAME:-%%RESIN_MACHINE_NAME%%}-debian:stretch
 
 ENV UDEV=off
 
-WORKDIR ./opt/ttn-gateway
+WORKDIR /opt/ttn-gateway
 
 RUN apt-get update && \
     apt-get install python-rpi.gpio && \
