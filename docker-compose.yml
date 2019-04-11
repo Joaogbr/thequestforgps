@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.7'
 volumes:
     node-red-data:
     node-red-test-data:
@@ -11,7 +11,7 @@ services:
   # The gateway itself
   gateway:
     build:
-      context: gateway
+      context: ./gateway
       args:
         GW_MACHINE_NAME:
     image: amedee/ttn-gateway
